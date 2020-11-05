@@ -60,10 +60,6 @@ app.get('/api/LoggedIn', jwtMW, (req, res) => {
     });
 });
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
-
 app.use(function (err, req, res, next) {
     if (err.name == 'UnauthorizedError') {
         res.status(401).json({
