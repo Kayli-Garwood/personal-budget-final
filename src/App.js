@@ -12,6 +12,7 @@ import DashboardPage from './Pages/DashboardPage';
 import LoginPage from './Pages/LoginPage';
 import SignUpPage from './Pages/SignUpPage';
 import Menu from './Pages/Menu';
+import Footer from './Pages/Footer';
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
           </Route>
         </Switch>
       </div>
+      <Footer/>
     </Router>
   );
 }
