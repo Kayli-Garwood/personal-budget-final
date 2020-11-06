@@ -9,11 +9,11 @@ function SignUpPage() {
   const history = useHistory();
 
   const handleUsername = (event) => {
-    setUserName(event.target.username);
+    setUserName(event.target.value);
   }
 
   const handlePassword = (event) => {
-    setPassword(event.target.password)
+    setPassword(event.target.value)
   }
 
   const handleSubmit = (event) => {
@@ -29,15 +29,21 @@ function SignUpPage() {
 
   return (
     <div>
-       <title>Signup below!</title>
+       <h1>Signup below!</h1>
        <form onSubmit = {handleSubmit}>
-          <label for="username">Enter Username</label>
+         <div className = "user">
+          <label for="username">Enter Username: </label>
           <input type="text" onChange={handleUsername}/>
+          </div>
 
-          <label for="password">Enter Password</label>
+        <div className = "pass">
+          <label for="password">Enter Password: </label>
           <input type="password" onChange={handlePassword}/>
+        </div>
 
+        <div className = "sign">
           <input type = "submit" value="Submit!" onChange={handleSubmit}/>
+        </div>
        </form>
     </div>
   );
