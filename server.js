@@ -49,7 +49,6 @@ app.post('/api/login', (req, res) => {
 //     const { username, password } = req.body;
 //     res.json({
 //         success: true,
-//          err: null,
 //         myContent: 'You are signed up!'
 //     });
 // });
