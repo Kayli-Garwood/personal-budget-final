@@ -1,9 +1,10 @@
-import React from 'react';
+import React from "react";
 
 function HomePage() {
   return (
     <div>
-     Home Page
+      <h1>Welcome to the Personal Budget App!</h1>
+      <h2>Please look around!</h2>
     </div>
   );
 }
