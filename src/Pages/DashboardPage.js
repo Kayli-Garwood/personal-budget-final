@@ -67,21 +67,21 @@ class DashboardPage extends Component {
   render(){
     return{
       <div>
-//       <form onSubmit={handleSubmit}>
-//         <div className="email">
-//           <label htmlFor="email">Enter budget name: </label>
-//           <input type="text" onChange={handleTitle} />
-//         </div>
+      <form onSubmit={handleSubmit}>
+        <div className="email">
+          <label htmlFor="email">Enter budget name: </label>
+          <input type="text" onChange={handleTitle} />
+        </div>
 
-//         <div className="pass">
-//           <label htmlFor="password">Enter budget value: </label>
-//           <input type="number" onChange={handleValue} />
-//         </div>
-//         <div className="login">
-//           <input type="submit" value="Submit!" />
-//         </div>
-//       </form>
-//       <Chart />
+        <div className="pass">
+          <label htmlFor="password">Enter budget value: </label>
+          <input type="number" onChange={handleValue} />
+        </div>
+        <div className="login">
+          <input type="submit" value="Submit!" />
+        </div>
+      </form>
+      <Chart />
     </div>
     }
   }
