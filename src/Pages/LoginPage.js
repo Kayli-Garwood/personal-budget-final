@@ -3,24 +3,24 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 function LoginPage() {
-  const [username, setUserName] = useState({});
   const [password, setPassword] = useState({});
+  const [email, setEmail] = useState({});
   const history = useHistory();
-
-  const handleUsername = (event) => {
-    setUserName(event.target.value);
-  };
 
   const handlePassword = (event) => {
     setPassword(event.target.value);
   };
 
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:4000/api/login", { username, password })
+      .post("http://localhost:4000/login", { email, password })
       .then((res) => {
-        history.push("/");
+        history.push("/dashboard");
       })
       .catch((err) => {
         console.log(err);
@@ -32,9 +32,9 @@ function LoginPage() {
       <h1>Already have an account?</h1>
       <h2>Login here!</h2>
       <form onSubmit={handleSubmit}>
-        <div className="user">
-          <label for="username">Enter Username: </label>
-          <input type="text" onChange={handleUsername} />
+        <div className="email">
+          <label for="email">Enter Email: </label>
+          <input type="email" onChange={handleEmail} />
         </div>
 
         <div className="pass">

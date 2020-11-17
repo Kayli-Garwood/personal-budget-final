@@ -1,39 +1,40 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import HomePage from './Pages/HomePage';
-import DashboardPage from './Pages/DashboardPage';
-import LoginPage from './Pages/LoginPage';
-import SignUpPage from './Pages/SignUpPage';
-import Menu from './Pages/Menu';
-import Logout from './Pages/Logout';
+import HomePage from "./Pages/HomePage";
+import DashboardPage from "./Pages/DashboardPage";
+import LoginPage from "./Pages/LoginPage";
+import SignUpPage from "./Pages/SignUpPage";
+import Menu from "./Pages/Menu";
+import Logout from "./Pages/Logout";
+import Chart from "./Pages/Charts";
 
 function App() {
   return (
     <Router>
-      <Menu/>
-      <div className ="main">
+      <Menu />
+      <div className="main">
         <Switch>
           <Route path="/dashboard">
-            <DashboardPage/>
+            <DashboardPage />
           </Route>
           <Route path="/signup">
-            <SignUpPage/>
+            <SignUpPage />
           </Route>
           <Route path="/login">
-            <LoginPage/>
+            <LoginPage />
           </Route>
-          <Route path = "/logout">
-          <Logout/>
+          <Route path="/logout">
+            <Logout />
+          </Route>
+          <Route path="/chart">
+            <Chart />
           </Route>
           <Route path="/">
-            <HomePage/>
+            <HomePage />
           </Route>
         </Switch>
       </div>

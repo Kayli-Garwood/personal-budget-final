@@ -1,108 +1,120 @@
 const express = require("express");
-const app = express();
-
-const jwt = require("jsonwebtoken");
-const exjwt = require("express-jwt");
+const cors = require("cors");
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const path = require("path");
+const jwt = require("jsonwebtoken");
+var bcrypt = require("bcryptjs");
+const app = express();
+const port = 4000;
+const budgetModel = require("./models/budget_schema");
+const userModel = require("./models/user_schema");
+let url = "mongodb://localhost:27017/myData";
 
-const mysql = require("mysql");
-
-app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
-  next();
-});
-
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cors());
+app.use("/", express.static("public"));
 
-const PORT = 4000;
-
-var connection = mysql.createConnection({
-  host: "sql9.freemysqlhosting.net",
-  user: "sql9375908",
-  password: "dQ3pw11usx",
-  database: "sql9375908",
+app.post("/register", (req, res) => {
+  mongoose
+    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+      let signUpData = new userModel({
+        email: req.body.email,
+        username: req.body.username,
+        password: req.body.password,
+        //passwordConf: req.body.passwordConf,
+      }).save(function (err, doc) {
+        if (err) res.json(err);
+        else res.send("Successfully inserted!");
+      });
+      //   userModel
+      //     .insertMany(signUpData)
+      //     .then((data) => {
+      //       res.json(data);
+      //       console.log("Account added!");
+      //       mongoose.connection.close();
+      //     })
+      //     .catch((connectionError) => {
+      //       console.log(connectionError);
+      //     });
+      // })
+      // .catch((connectionError) => {
+      //   console.log(connectionError);
+    });
 });
-connection.connect();
 
-const secretKey = "Secret Key";
-const jwtMW = exjwt({
-  secret: secretKey,
-  algorithms: ["HS256"],
-});
-
-app.post("/api/login", (req, res) => {
-  const { username, password } = req.body;
-  connection.query("SELECT * FROM users", (error, results) => {
-    if (error) {
-      console.log(error);
-      return;
-    }
-    for (let user of results) {
-      if (username == user.username && password == user.password) {
-        console.log("User has valid account!");
-        let token = jwt.sign(
-          { id: user.id, username: user.username },
-          secretKey,
-          { expiresIn: "7d" }
-        );
-        res.json({
-          success: true,
-          err: null,
-          token,
-        });
-        break;
-      } else {
-        res.status(401).json({
-          success: false,
-          token: null,
-          err: "Username or password is incorrect. Please try again.",
-        });
-      }
-    }
+app.post("/login", (req, res) => {
+  mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+  userModel.find({ email: req.body.email }, function (err, users) {
+    if (err) res.send(err);
+    else res.json(userModel);
   });
 });
 
-app.post("/api/signup", (req, res) => {
-  const { username, password } = req.body;
-
-  const sql = `INSERT INTO users (username, password) VALUES ('${username}', '${password}')`;
-  connection.query(sql, (err, results) => {
-    connection.end();
-    if (err) throw err;
-    console.log("Account added!");
-  });
-
-  res.json({
-    success: true,
-    err: null,
-  });
-});
-
-// app.get("/api/LoggedIn", jwtMW, (req, res) => {
-//   res.json({
-//     success: true,
-//     myContent: "You are still logged in!",
+// app.get("/budget/:id", (req, res) => {
+//   userModel.find({ email: req.body.email }, function (err, docs) {
+//     if (err) res.json(err);
+//     else {
+//       res.render("dashboard", { user: docs[0] });
+//     }
 //   });
 // });
 
-// app.get("/api/logout", (req, res) => {
-//   res.push("/");
+// app.get("/dashboard", jwtMW, (req, res) => {
+//   res.json({
+//     success: true,
+//     myContent: "Secret content",
+//   });
 // });
 
-app.use(function (err, req, res, next) {
-  if (err.name == "UnauthorizedError") {
-    res.status(401).json({
-      success: false,
-      err: "Please log in to continue!",
+app.get("/budget", (req, res) => {
+  mongoose
+    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+      budgetModel.find({}).then((data) => {
+        res.json(data);
+        mongoose.connection.close();
+      });
     });
-  } else {
-    next(err);
-  }
 });
 
-app.listen(PORT, () => {
-  console.log(`Serving on port ${PORT}`);
+app.post("/addBudget", (req, res) => {
+  console.log(req.body);
+  mongoose
+    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+      newBudget = {
+        title: req.body.title,
+        value: req.body.value,
+      };
+      budgetModel
+        .insertMany(newBudget)
+        .then((data) => {
+          console.log(data);
+          res.json(data);
+          mongoose.connection.close();
+        })
+        .catch((connectionError) => {
+          console.log(connectionError);
+        });
+    })
+    .catch((connectionError) => {
+      console.log(connectionError);
+    });
+});
+
+// app.get("/logout", (req, res) => {
+//   if (req.session) {
+//     req.session.destroy(function (err) {
+//       if (err) {
+//         return Next(err);
+//       } else {
+//         return res.redirect("/");
+//       }
+//     });
+//   }
+// });
+app.listen(port, () => {
+  console.log(`API served at http://localhost:${port}`);
 });
