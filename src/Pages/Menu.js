@@ -22,9 +22,6 @@ function Menu() {
           <li>
             <Link to="/logout">Log out</Link>
           </li>
-          <li>
-            <Link to="/chart">Charts</Link>
-          </li>
         </ul>
       </nav>
     </div>

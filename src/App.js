@@ -10,7 +10,6 @@ import LoginPage from "./Pages/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
 import Menu from "./Pages/Menu";
 import Logout from "./Pages/Logout";
-import Chart from "./Pages/Charts";
 
 function App() {
   return (
@@ -29,9 +28,6 @@ function App() {
           </Route>
           <Route path="/logout">
             <Logout />
-          </Route>
-          <Route path="/chart">
-            <Chart />
           </Route>
           <Route path="/">
             <HomePage />

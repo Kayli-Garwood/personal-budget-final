@@ -87,6 +87,7 @@ app.post("/addBudget", (req, res) => {
       newBudget = {
         title: req.body.title,
         value: req.body.value,
+        color: req.body.color,
       };
       budgetModel
         .insertMany(newBudget)
