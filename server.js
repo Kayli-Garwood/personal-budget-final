@@ -3,7 +3,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
-var bcrypt = require("bcryptjs");
+const exjwt = require("express-jwt");
+//const bcrypt = require("bcrypt");
 const app = express();
 const port = 4000;
 const budgetModel = require("./models/budget_schema");
@@ -14,6 +15,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use("/", express.static("public"));
+
+const secretKey = "My super secret key";
+const jwtMW = exjwt({
+  secret: secretKey,
+  algorithms: ["HS256"],
+});
 
 app.post("/register", (req, res) => {
   mongoose
@@ -28,25 +35,12 @@ app.post("/register", (req, res) => {
         if (err) res.json(err);
         else res.send("Successfully inserted!");
       });
-      //   userModel
-      //     .insertMany(signUpData)
-      //     .then((data) => {
-      //       res.json(data);
-      //       console.log("Account added!");
-      //       mongoose.connection.close();
-      //     })
-      //     .catch((connectionError) => {
-      //       console.log(connectionError);
-      //     });
-      // })
-      // .catch((connectionError) => {
-      //   console.log(connectionError);
     });
 });
 
 app.post("/login", (req, res) => {
   mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
-  userModel.find({ email: req.body.email }, function (err, users) {
+  userModel.findOne({ email: req.body.email }, function (err, user) {
     if (err) res.send(err);
     else res.json(userModel);
   });

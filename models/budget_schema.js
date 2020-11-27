@@ -11,11 +11,11 @@ const budgetSchema = new mongoose.Schema(
       required: true,
     },
     value: {
-      type: number,
+      type: Number,
       required: true,
     },
     color: {
-      type: string,
+      type: String,
       required: true,
     },
   },
@@ -23,24 +23,3 @@ const budgetSchema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model("budgetData", budgetSchema);
-
-/*
-{
-  user: String,
-  required: true,
-  related_data: {
-    title: {
-      type: String,
-      required: true
-    },
-    value: {
-      type: number,
-      required: true,
-    },
-    color: {
-      type: string,
-      required: true,
-    }
-  }
-}
-*/

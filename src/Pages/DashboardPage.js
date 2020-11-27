@@ -90,7 +90,7 @@ class DashboardPage extends Component {
             />
           </div>
 
-          <div className="login">
+          <div className="submit">
             <input type="submit" value="Submit!" />
           </div>
         </form>
