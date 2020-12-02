@@ -18,7 +18,12 @@ class DashboardPage extends Component {
   };
 
   async componentDidMount() {
-    const res = await axios.get("http://localhost:4000/budget");
+    let token = localStorage.getItem("jwt");
+    const res = await axios.get("http://localhost:4000/budget", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     let tempData = this.state.data;
     for (let i = 0; i < res.data.length; i++) {
       tempData.datasets[0].data[i] = res.data[i].value;

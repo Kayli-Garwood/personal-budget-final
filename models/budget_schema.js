@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
-//const budgetSchema = require("./userBudget_schema");
+const userSchema = require("./user_schema");
 
 const budgetSchema = new mongoose.Schema(
   {
-    // user: String,
+    // user: userSchema,
     // required: true,
-    // related_data: {
+    //  related_data: {
     title: {
       type: String,
       required: true,
@@ -19,6 +19,7 @@ const budgetSchema = new mongoose.Schema(
       required: true,
     },
   },
+  // },
   { collection: "budgetData" }
 );
 

@@ -4,12 +4,17 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const exjwt = require("express-jwt");
-//const bcrypt = require("bcrypt");
 const app = express();
 const port = 4000;
 const budgetModel = require("./models/budget_schema");
 const userModel = require("./models/user_schema");
 let url = "mongodb://localhost:27017/myData";
+
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
+  next();
+});
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -39,10 +44,29 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
+  console.log("receive");
   mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
   userModel.findOne({ email: req.body.email }, function (err, user) {
-    if (err) res.send(err);
-    else res.json(userModel);
+    if (err) {
+      res.send(err);
+    } else {
+      console.log("user: " + user);
+      if (user.email == req.body.email && user.password == req.body.password) {
+        let token = jwt.sign(
+          { email: user.email, password: user.password },
+          secretKey,
+          { expiresIn: "7d" }
+        );
+        console.log(token);
+        let obj = {
+          login: true,
+          user: user.email,
+          token,
+        };
+        res.json(obj);
+        console.log("login is done");
+      }
+    }
   });
 });
 
@@ -62,7 +86,8 @@ app.post("/login", (req, res) => {
 //   });
 // });
 
-app.get("/budget", (req, res) => {
+app.get("/budget", jwtMW, (req, res) => {
+  console.log("budget");
   mongoose
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -73,7 +98,7 @@ app.get("/budget", (req, res) => {
     });
 });
 
-app.post("/addBudget", (req, res) => {
+app.post("/addBudget", jwtMW, (req, res) => {
   console.log(req.body);
   mongoose
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })

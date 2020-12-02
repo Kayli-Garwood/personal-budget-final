@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Link } from "react-router-dom";
+import Logout from "./Logout";
 
 function Menu() {
   return (
@@ -21,6 +22,7 @@ function Menu() {
           </li>
           <li>
             <Link to="/logout">Log out</Link>
+            {/* <button onClick={() => Logout}>Logout</button> */}
           </li>
         </ul>
       </nav>
