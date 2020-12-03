@@ -16,12 +16,10 @@ function Logout() {
 
   localStorage.clear();
   window.location.reload();
-  window.location.href = "/";
+  window.location.href = "/login";
 
   return (
     <div className="logout">
-      <h1>Logout here!</h1>
-
       <Button onClick={Logout}>LogOut</Button>
     </div>
   );

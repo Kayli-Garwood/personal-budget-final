@@ -21,7 +21,7 @@ class DashboardPage extends Component {
     let token = localStorage.getItem("jwt");
     const res = await axios.get("http://localhost:4000/budget", {
       headers: {
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       },
     });
     let tempData = this.state.data;
@@ -49,6 +49,7 @@ class DashboardPage extends Component {
   handleSubmit = (event) => {
     console.log(this.state.title);
     console.log(this.state.value);
+    let token = localStorage.getItem("jwt");
     let color =
       "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
     axios
@@ -56,7 +57,11 @@ class DashboardPage extends Component {
         title: this.state.title,
         value: this.state.value,
         color: color,
-      })
+      },
+      { headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    })
       .then((res) => {
         console.log(res);
         let tempData = this.state.data;
@@ -65,6 +70,7 @@ class DashboardPage extends Component {
         tempData.labels.push(res.data[0].title);
         tempData.datasets[0].backgroundColor[0] = res.data[0].color;
         this.setState({ data: tempData });
+        console.log(this.state.data);
       })
       .catch((err) => {
         console.log(err);

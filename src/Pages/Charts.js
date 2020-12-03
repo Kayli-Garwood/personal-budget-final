@@ -1,6 +1,6 @@
 // import axios from "axios";
 import React, { Component } from "react";
-import { Doughnut } from "react-chartjs-2";
+import { Doughnut, Radar } from "react-chartjs-2";
 //  const Charts = (props) => {
 
 // const [chartData, setChartState] = useState(props.data);
@@ -23,6 +23,7 @@ class Charts extends Component {
     return (
       <div>
         <Doughnut data={this.props.chartData} />
+        {/* <Radar data={this.props.chartData} /> */}
       </div>
     );
   }
