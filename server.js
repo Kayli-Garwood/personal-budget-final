@@ -76,7 +76,7 @@ app.get("/budget/:id", (req, res) => {
   mongoose
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-    userModel.findById({})
+    budgetModel.findById({})
     .then((data) => {
       console.log(data);
       res.status(200).send(data);
