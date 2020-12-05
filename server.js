@@ -61,6 +61,7 @@ app.post("/login", (req, res) => {
         let obj = {
           login: true,
           user: user.email,
+         // id: user.id,
           token,
         };
         res.json(obj);
@@ -70,14 +71,19 @@ app.post("/login", (req, res) => {
   });
 });
 
-// app.get("/budget/:id", (req, res) => {
-//   userModel.find({ email: req.body.email }, function (err, docs) {
-//     if (err) res.json(err);
-//     else {
-//       res.render("dashboard", { user: docs[0] });
-//     }
-//   });
-// });
+
+app.get("/budget/:id", (req, res) => {
+  mongoose
+    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+    userModel.findById({})
+    .then((data) => {
+      console.log(data);
+      res.status(200).send(data);
+    });
+  });
+});
+
 
 // app.get("/dashboard", jwtMW, (req, res) => {
 //   res.json({

@@ -3,9 +3,10 @@ const userSchema = require("./user_schema");
 
 const budgetSchema = new mongoose.Schema(
   {
-    // user: userSchema,
-    // required: true,
-    //  related_data: {
+     id: {
+      type: Number,
+      unique: true,
+     },
     title: {
       type: String,
       required: true,
@@ -19,7 +20,6 @@ const budgetSchema = new mongoose.Schema(
       required: true,
     },
   },
-  // },
   { collection: "budgetData" }
 );
 
