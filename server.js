@@ -76,10 +76,11 @@ app.get("/budget/:id", (req, res) => {
   mongoose
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-    budgetModel.findById({})
+    budgetModel.findById(req.params.id)
     .then((data) => {
       console.log(data);
-      res.status(200).send(data);
+      res.status(200).json(data);
+      mongoose.connection.close();
     });
   });
 });
@@ -110,6 +111,7 @@ app.post("/addBudget", jwtMW, (req, res) => {
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
       newBudget = {
+        id: req.body.id,
         title: req.body.title,
         value: req.body.value,
         color: req.body.color,

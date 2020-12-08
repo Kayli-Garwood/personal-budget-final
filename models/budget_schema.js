@@ -1,11 +1,12 @@
+const { ObjectID } = require("mongodb");
 const mongoose = require("mongoose");
-const userSchema = require("./user_schema");
 
 const budgetSchema = new mongoose.Schema(
   {
      id: {
       type: Number,
       unique: true,
+      required: false,
      },
     title: {
       type: String,
