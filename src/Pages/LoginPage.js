@@ -39,6 +39,7 @@ const LoginPage = () => {
         if (res) {
           const token = res.data.token;
           localStorage.setItem("jwt", token);
+          localStorage.setItem("userId", res.data.userID);
           history.push("/dashboard");
           //  getDashboard();
         }

@@ -3,10 +3,9 @@ const mongoose = require("mongoose");
 
 const budgetSchema = new mongoose.Schema(
   {
-     id: {
-      type: Number,
-      unique: true,
-      required: false,
+     userId: {
+      type: String,
+      required: true,
      },
     title: {
       type: String,

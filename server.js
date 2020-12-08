@@ -62,7 +62,8 @@ app.post("/login", (req, res) => {
           login: true,
           user: user.email,
          // id: user.id,
-          token,
+          token: token,
+          userID: user._id,
         };
         res.json(obj);
         console.log("login is done");
@@ -72,11 +73,11 @@ app.post("/login", (req, res) => {
 });
 
 
-app.get("/budget/:id", (req, res) => {
+app.get("/budget/:userId", (req, res) => {
   mongoose
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
-    budgetModel.findById(req.params.id)
+    budgetModel.find({userId: req.params.userId})
     .then((data) => {
       console.log(data);
       res.status(200).json(data);
@@ -93,17 +94,17 @@ app.get("/budget/:id", (req, res) => {
 //   });
 // });
 
-app.get("/budget", jwtMW, (req, res) => {
-  console.log("budget");
-  mongoose
-    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-      budgetModel.find({}).then((data) => {
-        res.json(data);
-        mongoose.connection.close();
-      });
-    });
-});
+// app.get("/budget", jwtMW, (req, res) => {
+//   console.log("budget");
+//   mongoose
+//     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+//     .then(() => {
+//       budgetModel.find({}).then((data) => {
+//         res.json(data);
+//         mongoose.connection.close();
+//       });
+//     });
+// });
 
 app.post("/addBudget", jwtMW, (req, res) => {
   console.log(req.body);
@@ -111,7 +112,7 @@ app.post("/addBudget", jwtMW, (req, res) => {
     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
       newBudget = {
-        id: req.body.id,
+        userId: req.body.userId,
         title: req.body.title,
         value: req.body.value,
         color: req.body.color,

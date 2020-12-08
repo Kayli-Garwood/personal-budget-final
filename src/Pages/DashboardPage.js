@@ -19,7 +19,8 @@ class DashboardPage extends Component {
 
   async componentDidMount() {
     let token = localStorage.getItem("jwt");
-    const res = await axios.get("http://localhost:4000/budget/:id", {
+    console.log("http://localhost:4000/budget/"+localStorage.getItem("userId"))
+    const res = await axios.get("http://localhost:4000/budget/"+localStorage.getItem("userId"), {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -57,6 +58,7 @@ class DashboardPage extends Component {
         title: this.state.title,
         value: this.state.value,
         color: color,
+        userId: localStorage.getItem("userId")
       },
       { headers: {
         'Authorization': `Bearer ${token}`
