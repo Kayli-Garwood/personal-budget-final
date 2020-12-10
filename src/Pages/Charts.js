@@ -1,18 +1,5 @@
-// import axios from "axios";
 import React, { Component } from "react";
-import { Doughnut, Radar } from "react-chartjs-2";
-//  const Charts = (props) => {
-
-// const [chartData, setChartState] = useState(props.data);
-// useEffect(() => {
-//   // Note: the backend server is now on port 3001 since React defaults to 3000
-//   setChartState(props.data);
-// });
-
-//   return (
-//     <Doughnut data={props.chartData} />
-//   );
-// }
+import { Doughnut, Pie, Polar } from "react-chartjs-2";
 
 class Charts extends Component {
   constructor(props) {
@@ -23,7 +10,8 @@ class Charts extends Component {
     return (
       <div>
         <Doughnut data={this.props.chartData} />
-        {/* <Radar data={this.props.chartData} /> */}
+        <Pie data={this.props.chartData} />
+        <Polar data={this.props.chartData}/>
       </div>
     );
   }

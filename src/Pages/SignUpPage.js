@@ -25,7 +25,7 @@ function SignUpPage() {
     axios
       .post("http://localhost:4000/register", { email, username, password })
       .then((res) => {
-        history.push("/");
+        history.push("/login");
       })
       .catch((err) => {
         console.log(err);

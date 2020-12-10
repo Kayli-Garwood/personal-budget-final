@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const exjwt = require("express-jwt");
 const app = express();
 const port = 4000;
+const path = require("path");
 const budgetModel = require("./models/budget_schema");
 const userModel = require("./models/user_schema");
 let url = "mongodb://localhost:27017/myData";
@@ -19,7 +20,7 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use("/", express.static("public"));
+app.use(express.static(path.join(__dirname, "client/build")));
 
 const secretKey = "My super secret key";
 const jwtMW = exjwt({
@@ -35,7 +36,6 @@ app.post("/register", (req, res) => {
         email: req.body.email,
         username: req.body.username,
         password: req.body.password,
-        //passwordConf: req.body.passwordConf,
       }).save(function (err, doc) {
         if (err) res.json(err);
         else res.send("Successfully inserted!");
@@ -144,6 +144,7 @@ app.post("/addBudget", jwtMW, (req, res) => {
 //     });
 //   }
 // });
+
 app.listen(port, () => {
   console.log(`API served at http://localhost:${port}`);
 });
