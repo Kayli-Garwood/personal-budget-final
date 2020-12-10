@@ -6,13 +6,12 @@ const jwt = require("jsonwebtoken");
 const exjwt = require("express-jwt");
 const app = express();
 const port = 4000;
-const path = require("path");
 const budgetModel = require("./models/budget_schema");
 const userModel = require("./models/user_schema");
 let url = "mongodb://localhost:27017/myData";
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
   res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
   next();
 });
@@ -20,7 +19,6 @@ app.use((req, res, next) => {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, "client/build")));
 
 const secretKey = "My super secret key";
 const jwtMW = exjwt({
