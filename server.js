@@ -11,7 +11,7 @@ const userModel = require("./models/user_schema");
 let url = "mongodb://localhost:27017/myData";
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4000");
+  res.setHeader("Access-Control-Allow-Origin", "https://personal-budget-f-9adlc.ondigitalocean.app/");
   res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
   next();
 });

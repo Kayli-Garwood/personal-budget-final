@@ -22,7 +22,6 @@ function Menu() {
           </li>
           <li>
             <Link to="/logout">Log out</Link>
-            {/* <button onClick={() => Logout}>Logout</button> */}
           </li>
         </ul>
       </nav>

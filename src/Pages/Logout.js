@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { Button } from "semantic-ui-react";
-import { Redirect } from "react-router-dom";
+import React from "react";
 
 function Logout() {
   
@@ -9,8 +7,8 @@ function Logout() {
   window.location.href = "/login";
 
   return (
-    <div className="logout">
-      <Button onClick={Logout}>LogOut</Button>
+    <div>
+
     </div>
   );
 }
