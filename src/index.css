@@ -41,3 +41,7 @@ nav ul li a:hover  {
   background-color: white;
   color: #4d5791;
 }
+
+h1, h2, h3, p {
+  text-align: center;
+}
