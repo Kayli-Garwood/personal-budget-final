@@ -17,6 +17,8 @@ nav {
   background-color: #1c4966;
   height: 44px;
   padding: 0 40px;
+  text-align: center;
+  font-size: 17px;
 }
 
 nav ul,
@@ -44,4 +46,10 @@ nav ul li a:hover  {
 
 h1, h2, h3, p {
   text-align: center;
+}
+
+.bottom {
+  height: 50px;
+  background-color: #1c4966;
+  padding: 40px;
 }

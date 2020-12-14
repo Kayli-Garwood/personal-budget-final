@@ -5,6 +5,7 @@ function HomePage() {
     <div>
       <h1>Welcome to the Personal Budget App!</h1>
       <h2>Please look around!</h2>
+    
       <main class="container center">
 
         <div class="page-area">
