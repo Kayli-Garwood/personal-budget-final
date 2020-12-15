@@ -5,7 +5,8 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const exjwt = require("express-jwt");
 const app = express();
-const port = 4000;
+const connectDB = require('./DB/connection')
+const port = process.env.port || 4000;
 const budgetModel = require("./models/budget_schema");
 const userModel = require("./models/user_schema");
 let url = "mongodb://localhost:27017/myData";
@@ -25,6 +26,8 @@ const jwtMW = exjwt({
   secret: secretKey,
   algorithms: ["HS256"],
 });
+
+connectDB();
 
 app.post("/register", (req, res) => {
   mongoose
@@ -130,18 +133,6 @@ app.post("/addBudget", jwtMW, (req, res) => {
       console.log(connectionError);
     });
 });
-
-// app.get("/logout", (req, res) => {
-//   if (req.session) {
-//     req.session.destroy(function (err) {
-//       if (err) {
-//         return Next(err);
-//       } else {
-//         return res.redirect("/");
-//       }
-//     });
-//   }
-// });
 
 app.listen(port, () => {
   console.log(`API served at http://localhost:${port}`);

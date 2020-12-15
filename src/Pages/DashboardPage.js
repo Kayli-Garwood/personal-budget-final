@@ -87,6 +87,7 @@ class DashboardPage extends Component {
         <h1>Make a chart for your budget here!</h1>
         <h2>After submitting, refresh the page to see your personal budget charts!</h2>
         <form onSubmit={this.handleSubmit}>
+          <div className="budget">
           <div className="title">
             <label htmlFor="title">Enter budget name: </label>
             <input
@@ -107,6 +108,7 @@ class DashboardPage extends Component {
 
           <div className="submit">
             <input type="submit" value="Submit!" />
+          </div>
           </div>
         </form>
         <Charts chartData={this.state.data} />

@@ -37,6 +37,7 @@ function SignUpPage() {
       <h1>Don't have an account?</h1>
       <h2>Sign up here!</h2>
       <form onSubmit={handleSubmit}>
+        <div className="signUp">
         <div className="email">
           <label for="email">Enter Email: </label>
           <input type="email" onChange={handleEmail} />
@@ -51,6 +52,7 @@ function SignUpPage() {
         </div>
         <div className="login">
           <input type="submit" value="Submit!" />
+        </div>
         </div>
       </form>
     </div>
