@@ -5,10 +5,11 @@ const bodyParser = require("body-parser");
 const jwt = require("jsonwebtoken");
 const exjwt = require("express-jwt");
 const app = express();
-const connectDB = require('./DB/connection')
+const connectDB = require('./DB/connection');
 const port = process.env.port || 4000;
 const budgetModel = require("./models/budget_schema");
 const userModel = require("./models/user_schema");
+const URI = "mongodb+srv://kgarwood:103198@newcluster.rlswc.mongodb.net/users?retryWrites=true&w=majority"
 let url = "mongodb://localhost:27017/myData";
 
 app.use((req, res, next) => {
@@ -31,7 +32,7 @@ connectDB();
 
 app.post("/register", (req, res) => {
   mongoose
-    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
       let signUpData = new userModel({
         email: req.body.email,
@@ -46,7 +47,7 @@ app.post("/register", (req, res) => {
 
 app.post("/login", (req, res) => {
   console.log("receive");
-  mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true });
+  mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
   userModel.findOne({ email: req.body.email }, function (err, user) {
     if (err) {
       res.send(err);
@@ -76,7 +77,7 @@ app.post("/login", (req, res) => {
 
 app.get("/budget/:userId", (req, res) => {
   mongoose
-    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
     budgetModel.find({userId: req.params.userId})
     .then((data) => {
@@ -110,7 +111,7 @@ app.get("/budget/:userId", (req, res) => {
 app.post("/addBudget", jwtMW, (req, res) => {
   console.log(req.body);
   mongoose
-    .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+    .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
       newBudget = {
         userId: req.body.userId,
