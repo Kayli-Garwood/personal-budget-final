@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require('path');
 const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -29,6 +30,12 @@ const jwtMW = exjwt({
 });
 
 connectDB();
+
+app.use(express.static(path.join(__dirname, 'build')));
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+});
 
 app.post("/register", (req, res) => {
   mongoose
