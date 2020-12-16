@@ -13,7 +13,7 @@ const URI = "mongodb+srv://kgarwood:103198@newcluster.rlswc.mongodb.net/users?re
 let url = "mongodb://localhost:27017/myData";
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "https://personal-budget-f-hgo3w.ondigitalocean.app");
   res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
   next();
 });
