@@ -11,7 +11,7 @@ const port = process.env.port || 4000;
 const budgetModel = require("./models/budget_schema");
 const userModel = require("./models/user_schema");
 const URI = "mongodb+srv://kgarwood:103198@newcluster.rlswc.mongodb.net/users?retryWrites=true&w=majority"
-let url = "mongodb://localhost:27017/myData";
+
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://104.131.54.49/");
