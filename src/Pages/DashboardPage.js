@@ -19,8 +19,8 @@ class DashboardPage extends Component {
 
   async componentDidMount() {
     let token = localStorage.getItem("jwt");
-    console.log("http://localhost:4000/budget/"+localStorage.getItem("userId"))
-    const res = await axios.get("http://localhost:4000/budget/"+localStorage.getItem("userId"), {
+    console.log("http://104.131.54.49/budget/"+localStorage.getItem("userId"))
+    const res = await axios.get("http://104.131.54.49/budget/"+localStorage.getItem("userId"), {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
@@ -54,7 +54,7 @@ class DashboardPage extends Component {
     let color =
       "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
     axios
-      .post("http://localhost:4000/addBudget", {
+      .post("http://104.131.54.49/addBudget", {
         title: this.state.title,
         value: this.state.value,
         color: color,

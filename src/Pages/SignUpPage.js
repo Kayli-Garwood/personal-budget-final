@@ -23,7 +23,7 @@ function SignUpPage() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post("http://localhost:4000/register", { email, username, password })
+      .post("http://104.131.54.49/register", { email, username, password })
       .then((res) => {
         history.push("/login");
       })
