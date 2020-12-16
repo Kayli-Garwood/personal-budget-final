@@ -14,7 +14,7 @@ const URI = "mongodb+srv://kgarwood:103198@newcluster.rlswc.mongodb.net/users?re
 
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://104.131.54.49/");
+  res.setHeader("Access-Control-Allow-Origin", "http://104.131.54.49");
   res.setHeader("Access-Control-Allow-Headers", "Content-type,Authorization");
   next();
 });
