@@ -37,6 +37,8 @@ app.get('/*', function(req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'))
 });
 
+app.listen(4000);
+
 app.post("/register", (req, res) => {
   mongoose
     .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -142,6 +144,6 @@ app.post("/addBudget", jwtMW, (req, res) => {
     });
 });
 
-app.listen(port, () => {
-  console.log(`API served at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`API served at http://localhost:${port}`);
+// });
