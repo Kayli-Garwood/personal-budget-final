@@ -10,14 +10,7 @@ const connectDB = require('./DB/connection');
 const port = process.env.port || 4000;
 const budgetModel = require("./models/budget_schema");
 const userModel = require("./models/user_schema");
-
-const MongoClient = require('mongodb').MongoClient;
-const URI = "mongodb+srv://kgarwood:103198@newcluster.rlswc.mongodb.net/user?retryWrites=true&w=majority";
-const client = new MongoClient(URI, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("user").collection("test");
-  client.close();
-});
+const URI = "mongodb+srv://kgarwood:103198@newcluster.rlswc.mongodb.net/users?retryWrites=true&w=majority"
 
 
 app.use((req, res, next) => {
