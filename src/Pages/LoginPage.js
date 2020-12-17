@@ -11,7 +11,7 @@ const LoginPage = () => {
     const password = document.getElementById("password").value;
 
     await axios
-      .post(__dirname + "/login", { email, password })
+      .post("http://http://104.131.54.49" + "/login", { email, password })
       .then((res) => {
         if (res) {
           const token = res.data.token;
