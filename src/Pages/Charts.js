@@ -11,7 +11,7 @@ class Charts extends Component {
       <div>
         <Doughnut data={this.props.chartData} />
         <Pie data={this.props.chartData} />
-        <Polar data={this.props.chartData}/>
+        {/* <Polar data={this.props.chartData}/> */}
       </div>
     );
   }
