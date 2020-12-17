@@ -71,7 +71,6 @@ app.post("/login", (req, res) => {
         let obj = {
           login: true,
           user: user.email,
-         // id: user.id,
           token: token,
           userID: user._id,
         };
@@ -95,26 +94,6 @@ app.get("/budget/:userId", (req, res) => {
     });
   });
 });
-
-
-// app.get("/dashboard", jwtMW, (req, res) => {
-//   res.json({
-//     success: true,
-//     myContent: "Secret content",
-//   });
-// });
-
-// app.get("/budget", jwtMW, (req, res) => {
-//   console.log("budget");
-//   mongoose
-//     .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
-//     .then(() => {
-//       budgetModel.find({}).then((data) => {
-//         res.json(data);
-//         mongoose.connection.close();
-//       });
-//     });
-// });
 
 app.post("/addBudget", jwtMW, (req, res) => {
   console.log(req.body);
