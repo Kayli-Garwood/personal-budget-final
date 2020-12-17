@@ -21,23 +21,25 @@ class DashboardPage extends Component {
   async componentDidMount() {
     let token = localStorage.getItem("jwt");
     console.log("http://104.131.54.49/budget/"+localStorage.getItem("userId"))
-    const res = await axios.get("http://104.131.54.49/budget/"+localStorage.getItem("userId"), {
+     await axios.get("http://104.131.54.49/budget/"+localStorage.getItem("userId"), {
       headers: {
         'Authorization': `Bearer ${token}`,
       },
-    });
-    let tempData = this.state.data;
-    for (let i = 0; i < res.data.length; i++) {
-      tempData.datasets[0].data[i] = res.data[i].value;
-      tempData.labels[i] = res.data[i].title;
-      tempData.datasets[0].backgroundColor[i] = res.data[i].color;
-    }
-
-    this.setState({
-      data: Object.assign({}, this.state.data, {
-        data: tempData,
-      }),
-    });
+    }).then((res) => {
+      let tempData = this.state.data;
+      for (let i = 0; i < res.data.length; i++) {
+        tempData.datasets[0].data[i] = res.data[i].value;
+        tempData.labels[i] = res.data[i].title;
+        tempData.datasets[0].backgroundColor[i] = res.data[i].color;
+      }
+  
+      this.setState({
+        data: Object.assign({}, this.state.data, {
+          data: tempData,
+        }),
+      });
+    })
+    
   }
 
   handleTitle = (event) => {
