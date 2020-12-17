@@ -83,6 +83,7 @@ app.post("/login", (req, res) => {
 
 
 app.get("/budget/:userId", (req, res) => {
+  console.log(req.params.userId);
   mongoose
     .connect(URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
