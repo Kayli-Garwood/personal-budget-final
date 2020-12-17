@@ -11,7 +11,7 @@ const LoginPage = () => {
     const password = document.getElementById("password").value;
 
     await axios
-      .post("http://104.131.54.49:4000/login", { email, password })
+      .post(__dirname + "/login", { email, password })
       .then((res) => {
         if (res) {
           const token = res.data.token;
@@ -24,7 +24,7 @@ const LoginPage = () => {
 
   return (
     <div className="lForm">
-      <h1>Already have an account?</h1>
+      <h1>Already have an account? hello</h1>
       <h2>Login here!</h2>
       <form onSubmit={handleSubmit}>
         <div className="loginForm">
