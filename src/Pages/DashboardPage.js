@@ -55,7 +55,7 @@ class DashboardPage extends Component {
     let color =
       "#" + ((Math.random() * 0xffffff) << 0).toString(16).padStart(6, "0");
     axios
-      .post("http://173.94.80.104/addBudget", {
+      .post("http://104.131.54.49/addBudget", {
         title: this.state.title,
         value: this.state.value,
         color: color,
