@@ -17,6 +17,7 @@ const LoginPage = () => {
           const token = res.data.token;
           localStorage.setItem("jwt", token);
           localStorage.setItem("userId", res.data.userID);
+          console.log(localStorage.getItem("userId"));
           history.push("/dashboard");
         }
       });
