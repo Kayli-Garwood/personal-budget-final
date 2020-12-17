@@ -10,6 +10,7 @@ class DashboardPage extends Component {
       labels: [],
       datasets: [
         {
+          label: [],
           data: [],
           backgroundColor: [],
         },
