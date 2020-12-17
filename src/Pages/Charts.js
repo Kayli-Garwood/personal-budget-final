@@ -9,8 +9,8 @@ class Charts extends Component {
   render() {
     return (
       <div>
-        <Doughnut data={this.props.chartData} />
-        <Pie data={this.props.chartData} />
+        <Doughnut width={450} height={250} data={this.props.chartData} />
+        <Pie width={450} height={250} data={this.props.chartData} />
         {/* <Polar data={this.props.chartData}/> */}
       </div>
     );
