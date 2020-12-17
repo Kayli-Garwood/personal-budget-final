@@ -24,7 +24,7 @@ const LoginPage = () => {
 
   return (
     <div className="lForm">
-      <h1>Already have an account?</h1>
+      <h1>Already have an account??</h1>
       <h2>Login here!</h2>
       <form onSubmit={handleSubmit}>
         <div className="loginForm">
